@@ -24,64 +24,70 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-
-        $cardOption = $request->card_option;
+        try {
+            $cardOption = $request->card_option;
         
-        $user = new User;
-        $user->name = $request-> name;
-        $user->email = $request-> email;
-        $user->cpf = $request-> cpf;
-        $user->phone = $request-> phone;
-        $user->date_of_birth = $request->date_of_birth;
-        $user->save();
+            $user = new User;
+            $user->name = $request-> name;
+            $user->email = $request-> email;
+            $user->cpf = $request-> cpf;
+            $user->phone = $request-> phone;
+            $user->date_of_birth = $request->date_of_birth;
+            $user->save();
 
-        $address = new Address;
-        $address->user_id = $user->id;
-        $address->zipcode = $request->zipcode;
-        $address->street = $request->street;
-        $address->number = $request->number;
-        $address->complement = $request->complement;
-        $address->district = $request->district;
-        $address->city = $request->city;
-        $address->state = $request->state;
-        $address->save();
+            $address = new Address;
+            $address->user_id = $user->id;
+            $address->zipcode = $request->zipcode;
+            $address->street = $request->street;
+            $address->number = $request->number;
+            $address->complement = $request->complement;
+            $address->district = $request->district;
+            $address->city = $request->city;
+            $address->state = $request->state;
+            $address->save();
 
-        if ($cardOption === 'credit') {
+            if ($cardOption === 'credit') {
 
-            $fisrtNumbers = $request->first_numbers_card;
-            $lastNumbers = $request->last_numbers_card;
+                $firstNumbers = $request->first_numbers_card;
+                $lastNumbers = $request->last_numbers_card;
 
-            $checkDuplicateCard = Credit::where('first_numbers_card', 'LIKE',$fisrtNumbers.'%')->where('last_numbers_card', 'LIKE',$lastNumbers.'%');
-            
-            if ($checkDuplicateCard->exists()) {
-                return response()->json(['success' => false, 'message' => 'Cartao Ja Cadastrado'],400);
+                $checkDuplicateCard = Credit::where('first_numbers_card', '=', $firstNumbers)
+                ->where('last_numbers_card', '=', $lastNumbers)
+                ->exists();
+
+                
+                if ($checkDuplicateCard) {
+                    return response()->json(['success' => false, 'message' => 'Cartao Ja Cadastrado'],400);
+                }
+
+                $credit = new Credit;
+                $credit->card_flag = $request->card_flag;
+                $credit->first_numbers_card = $request->first_numbers_card;
+                $credit->last_numbers_card = $request->last_numbers_card;
+                $credit->save();
+            }else {
+
+                $debit = new Debit;
+                $debit->user_id = $user->id;
+                $debit->bank = $request->bank;
+                $debit->agency = $request->agency;
+                $debit->account = $request->account;
+                $debit->digit = $request->digit;
+                $debit->save();
             }
 
-            $credit = new Credit;
-            $credit->card_flag = $request->card_flag;
-            $credit->first_numbers_card = $request->first_numbers_card;
-            $credit->last_numbers_card = $request->last_numbers_card;
-            $credit->save();
-        }else {
+            $donor = new Donator;
+            $donor->name = $request-> name;
+            $donor->user_id = $user->id;
+            $donor->donation_range =$request->donation_interval; // Alterar isso
+            $donor->payment_method = $cardOption ? 'Credito' : 'Debito'; 
+            $donor->value = $request->donation_value;
+            $donor->save();
 
-            $debit = new Debit;
-            $debit->user_id = $user->id;
-            $debit->bank = $request->bank;
-            $debit->agency = $request->agency;
-            $debit->account = $request->account;
-            $debit->digit = $request->digit;
-            $debit->save();
+            return response()->json(['success' => true, 'message' => "Cadastrado Realizado com Sucesso"], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => $th->getMessage()], 500);
         }
-
-        $donor = new Donator;
-        $donor->name = $request-> name;
-        $donor->user_id = $user->id;
-        $donor->donation_range =$request->donation_interval; // Alterar isso
-        $donor->payment_method = $cardOption ? 'Credito' : 'Debito'; 
-        $donor->value = $request->donation_value;
-        $donor->save();
-
-        return response()->json(['success' => true, 'message' => "Cadastrado Realizado com Sucesso"],200);
     }
 
     /**
