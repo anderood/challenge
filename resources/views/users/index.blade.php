@@ -96,6 +96,17 @@
                         </div>
                     </fieldset>
 
+                    <div class="form-group">
+                        <label for="donation_interval">Intervalo de doação</label>
+                        <select class="form-control" id="donation_interval" name="donation_interval">
+                            <option value="Unico">Unico</option>
+                            <option value="Bimestral">Bimestral</option>
+                            <option value="Semestral">Semestral</option>
+                            <option value="Anual">Anual</option>
+                        </select>
+                    </div>
+
+
                     
                     <div class="form-group mt-4">
                         <label>Opção de Cartão</label>
@@ -121,11 +132,11 @@
                         </div>
                         <div class="form-group">
                             <label for="first_numbers_card">Primeiros números do Cartão</label>
-                            <input type="text" class="form-control" id="first_numbers_card" name="first_numbers_card">
+                            <input type="text" maxlength="6" class="form-control" id="first_numbers_card" name="first_numbers_card">
                         </div>
                         <div class="form-group">
                             <label for="last_numbers_card">Últimos números do Cartão</label>
-                            <input type="text" class="form-control" id="last_numbers_card" name="last_numbers_card">
+                            <input type="text" maxlength="4" class="form-control" id="last_numbers_card" name="last_numbers_card">
                         </div>
                     </fieldset>
 
@@ -150,6 +161,12 @@
                             <input type="text" class="form-control" id="digit" name="digit">
                         </div>
                     </fieldset>
+
+                    <div class="form-group">
+                        <label for="donation_value">Valor da Doação</label>
+                        <input type="text" class="form-control" id="donation_value" name="donation_value" placeholder="Digite o valor da doação">
+                    </div>
+
 
                     <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
                 </form>
