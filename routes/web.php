@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
 Route::post('/users', [App\Http\Controllers\UserController::class, 'create']);
+
+Route::get('/list', [App\Http\Controllers\DonorController::class, 'index']);
