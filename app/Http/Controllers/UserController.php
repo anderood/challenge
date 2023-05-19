@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Credit;
+use App\Models\Debit;
+use App\Models\Donator;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
