@@ -33,6 +33,10 @@ class UserController extends Controller
             $user->cpf = $request-> cpf;
             $user->phone = $request-> phone;
             $user->date_of_birth = $request->date_of_birth;
+            $user->email_verified_at = "";
+            $user->password = "";
+            $user->remember_token = "";
+
             $user->save();
 
             $address = new Address;

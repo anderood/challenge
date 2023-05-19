@@ -16,6 +16,7 @@ class User extends Model
         'cpf',
         'phone',
         'date_of_birth',
+        'email_verified_at',
         'created_at',
         'updated_at',
     ];
