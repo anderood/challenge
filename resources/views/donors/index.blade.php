@@ -10,7 +10,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Meu Site</a>
+        <a class="navbar-brand" href="#">Donators</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,10 +18,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" >Usuários cadastrados</a>
+                    <a class="nav-link" >Fazer Doação</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" >Doadores</a>
+                    <a class="nav-link" >Lista de Doadores</a>
                 </li>
             </ul>
         </div>

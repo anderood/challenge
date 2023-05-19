@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Donator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Model
 {
@@ -31,5 +33,19 @@ class User extends Model
     public function debit()
     {
         return $this->hasOne('App\Models\DebitPayments');
+    }
+
+   public function userHistories(): HasMany
+   {
+       return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
+   }
+    public function insertUserHistory() : History
+    {
+        return History::firstOrCreate([
+            'name'=>'Anderson',
+            'description'=>'Doação Realizada',
+            'value' => "100",
+            'user_id'=> $this->id,
+        ]);
     }
 }
