@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
+Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
 Route::post('/users', [App\Http\Controllers\UserController::class, 'create']);
 
-Route::get('/list', [App\Http\Controllers\DonorController::class, 'index']);
+Route::get('/list', [App\Http\Controllers\DonorController::class, 'index'])->name('donor.index');

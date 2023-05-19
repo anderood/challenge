@@ -18,10 +18,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" >Cadastrar</a>
+                    <a class="nav-link" href="{{ route('user.index') }}">Cadastrar</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Lista de Doadores</a>
+                    <a class="nav-link" href="{{ route('donor.index') }}">Lista de Doadores</a>
                 </li>
             </ul>
         </div>
