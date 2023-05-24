@@ -36,7 +36,6 @@ class UserController extends Controller
             $user->email_verified_at = "";
             $user->password = "";
             $user->remember_token = "";
-
             $user->save();
 
             $address = new Address;
@@ -61,7 +60,8 @@ class UserController extends Controller
 
                 
                 if ($checkDuplicateCard) {
-                    return response()->json(['success' => false, 'message' => 'Cartao Ja Cadastrado'],400);
+                    session()->flash('error', 'Número de cartão já cadastrado!');
+                    return redirect()->back();
                 }
 
                 $credit = new Credit;
@@ -88,9 +88,13 @@ class UserController extends Controller
             $donor->value = $request->donation_value;
             $donor->save();
 
-            return response()->json(['success' => true, 'message' => "Cadastrado Realizado com Sucesso"], 200);
+            session()->flash('success', 'Cadastro realizado com Sucesso!');
+
+            return redirect()->back();
+
         } catch (\Throwable $th) {
-            return response()->json(['success' => false, 'message' => $th->getMessage()], 500);
+            session()->flash('error', 'Dados informados não são validos!');
+            return redirect()->back();
         }
     }
 

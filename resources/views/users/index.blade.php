@@ -30,12 +30,18 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-6 offset-md-3">
+            @if(session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @elseif(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <h2>Cadastro</h2>
-
-                
                 <form method="POST" >
                     @csrf
-
                     
                     <fieldset>
                         <legend>Dados do Usuário</legend>
