@@ -83,8 +83,8 @@ class UserController extends Controller
             $donor = new Donator;
             $donor->name = $request-> name;
             $donor->user_id = $user->id;
-            $donor->donation_range =$request->donation_interval; // Alterar isso
-            $donor->payment_method = $cardOption === 'Credito' ? 'Credito' : 'Debito'; 
+            $donor->donation_range =$request->donation_interval;
+            $donor->payment_method = $cardOption === 'credit' ? 'Credito' : 'Debito'; 
             $donor->value = $request->donation_value;
             $donor->save();
 
